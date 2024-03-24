@@ -46,6 +46,11 @@ const linksList: EssentialLinkProps[] = [
     icon: 'analytics',
     link: '/cap-nhat-gia-ruou'
   },
+  {
+    title: 'Tính tiền rượu',
+    icon: 'dataset',
+    link: '/tinh-tien-ruou'
+  }
 ];
 
 const leftDrawerOpen = ref(false);

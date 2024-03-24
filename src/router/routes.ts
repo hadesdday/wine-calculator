@@ -11,6 +11,10 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/ActualQuantityCalculator.vue'),
       },
       {
+        path: 'tinh-tien-ruou',
+        component: () => import('pages/WineBillCalculate.vue'),
+      },
+      {
         path: 'cap-nhat-gia-ruou',
         component: () => import('pages/UpdateWineData.vue'),
       },
