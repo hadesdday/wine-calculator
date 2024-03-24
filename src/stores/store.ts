@@ -1,31 +1,50 @@
 import { defineStore } from 'pinia';
+import { type WineData } from 'src/model';
 
 export const useWineStore = defineStore('wineData', {
-  state: () => ({
-    NORMAL_WINE_PRICE_FOR_DRINKER: 17000,
-    NORMAL_WINE_PRICE_FOR_SELLER: 16000,
-    STRONG_WINE_PRICE_FOR_DRINKER: 34000,
-    STRONG_WINE_PRICE_FOR_SELLER: 34000,
-    GLUTINOUS_WINE_PRICE_FOR_DRINKER: 40000,
-    GLUTINOUS_WINE_PRICE_FOR_SELLER: 40000,
-  }),
-  getters: {},
+  state: () =>
+    localStorage.getItem('wineData')
+      ? JSON.parse(localStorage.getItem('wineData') as string)
+      : {
+          normalWinePriceForDrinker: 17000,
+          normalWinePriceForSeller: 16000,
+          strongWinePriceForDrinker: 34000,
+          strongWinePriceForSeller: 34000,
+          glutinousWinePriceForDrinker: 40000,
+          glutinousWinePriceForSeller: 40000,
+        },
   actions: {
     setData(data: number, type: number) {
       switch (type) {
         case 0:
-          this.NORMAL_WINE_PRICE_FOR_DRINKER = data;
+          this.normalWinePriceForDrinker = data;
           break;
         case 1:
-          this.NORMAL_WINE_PRICE_FOR_SELLER = data;
+          this.normalWinePriceForSeller = data;
           break;
         case 2:
-          this.STRONG_WINE_PRICE_FOR_DRINKER = data;
+          this.strongWinePriceForDrinker = data;
           break;
         case 3:
-          this.GLUTINOUS_WINE_PRICE_FOR_DRINKER = data;
+          this.strongWinePriceForSeller = data;
+          break;
+        case 4:
+          this.glutinousWinePriceForDrinker = data;
+          break;
+        case 5:
+          this.glutinousWinePriceForSeller = data;
           break;
       }
+      localStorage.setItem('wineData', JSON.stringify(this.$state));
+    },
+    patchData(data: WineData) {
+      this.normalWinePriceForDrinker = data.normalWinePriceForDrinker;
+      this.normalWinePriceForSeller = data.normalWinePriceForSeller;
+      this.strongWinePriceForDrinker = data.strongWinePriceForDrinker;
+      this.strongWinePriceForSeller = data.strongWinePriceForSeller;
+      this.glutinousWinePriceForDrinker = data.glutinousWinePriceForDrinker;
+      this.glutinousWinePriceForSeller = data.glutinousWinePriceForSeller;
+      localStorage.setItem('wineData', JSON.stringify(data));
     },
   },
 });
